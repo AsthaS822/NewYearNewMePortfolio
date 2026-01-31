@@ -1,0 +1,133 @@
+/* RESET & REBUILD: SPLIT LAYOUT */
+.orbit-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /* Full screen standard */
+    background: radial-gradient(circle at center, #1a0025, #000 70%);
+    display: flex;
+    /* ⬅️ Split screen power */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 40;
+    /* High visibility */
+    padding: 0 5%;
+    /* Side gutters */
+}
+
+/* LEFT SIDE: ORBIT STAGE */
+.orbit-container-left {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid green; Debug only */
+}
+
+/* RIGHT SIDE: TEXT DATA */
+.orbit-container-right {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    /* Gap from orbit */
+}
+
+/* ORBIT SYSTEM (Local to Left Container) */
+.orbit-system {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+.orbit-ring {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed rgba(180, 120, 255, 0.3);
+    box-shadow: 0 0 50px rgba(180, 120, 255, 0.1);
+    animation: spin-slow 60s linear infinite;
+}
+
+.orbit-planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    /* Transform handled by JS for circular placement */
+}
+
+/* TEXT TYPOGRAPHY */
+.cert-card {
+    position: relative;
+    z-index: 10;
+}
+
+.cert-label {
+    font-family: 'Orbitron', sans-serif;
+    color: #a855f7;
+    /* Purple-500 */
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.cert-title {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+}
+
+.cert-issuer {
+    font-size: 1.25rem;
+    color: #9ca3af;
+    /* Gray-400 */
+    border-left: 2px solid #a855f7;
+    padding-left: 1rem;
+}
+
+/* UTILS */
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1024px) {
+    .orbit-section {
+        flex-direction: column;
+        padding-top: 100px;
+    }
+
+    .orbit-container-right {
+        padding-left: 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .cert-issuer {
+        border-left: none;
+        border-top: 2px solid #a855f7;
+        padding-top: 1rem;
+        padding-left: 0;
+    }
+}

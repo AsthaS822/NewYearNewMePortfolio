@@ -1,0 +1,195 @@
+.projects-main {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(280px, 32%) 1fr;
+    align-items: center;
+    gap: 6vw;
+    padding: 120px 6vw;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 85%;
+    margin: 0 auto;
+    height: 700px;
+    z-index: 1;
+    pointer-events: none;
+    /* prevents overlap feel */
+}
+
+@media (min-width: 1024px) {
+    .canvas-wrapper {
+        transform: translateX(40px);
+    }
+}
+
+.side-content {
+    position: relative;
+    z-index: 10;
+    padding-left: 2vw;
+    max-width: 420px;
+    transition: all 0.6s ease;
+}
+
+@media (min-width: 1024px) {
+    .side-content {
+        transform: translateX(-40px);
+    }
+}
+
+.eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: #888;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.title {
+    font-family: var(--font-orbitron);
+    font-size: 80px;
+    font-weight: 900;
+    margin: 10px 0;
+    color: #111;
+    line-height: 1;
+}
+
+.accent-bar {
+    width: 60px;
+    height: 4px;
+    background: #ff4d94;
+    margin-top: 30px;
+}
+
+/* Atmosphere Blur */
+.is-focused .side-content,
+.is-focused .canvas-wrapper {
+    filter: blur(15px);
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* THE LAYERED GLASS OVERLAY */
+.center-focus-overlay {
+    /* Critical: This must be absolute to stay on top of the Canvas */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* This perfectly centers the box */
+
+    width: 90%;
+    max-width: 600px;
+    z-index: 999;
+    /* Higher than the 3D Canvas */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    /* Allows interaction */
+}
+
+/* Outer layer: Atmospheric blur */
+.glass-layer-outer {
+    background: rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(20px);
+    border-radius: 60px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+}
+
+/* Inner layer: Pure white area */
+.glass-layer-inner {
+    background: #ffffff;
+    border-radius: 48px;
+    padding: 60px;
+    width: 600px;
+    text-align: left;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+}
+
+/* Text Styling */
+.tech-badge-premium {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.project-title-layered {
+    font-family: var(--font-orbitron);
+    font-size: 3.5rem;
+    color: #111;
+    margin: 0 0 15px 0;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.project-desc-layered {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Progress Animation */
+.scroll-progress-bar {
+    width: 100%;
+    height: 3px;
+    background: #eee;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.progress-fill {
+    height: 100%;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .projects-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 80px 5%;
+    }
+
+    .side-content {
+        transform: none;
+        text-align: center;
+        max-width: none;
+    }
+
+    .canvas-wrapper {
+        transform: none;
+        height: 500px;
+    }
+
+    .glass-layer-inner {
+        width: 90vw;
+        padding: 40px;
+    }
+
+    .project-title-layered {
+        font-size: 2.5rem;
+    }
+}

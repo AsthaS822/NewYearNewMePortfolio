@@ -1,0 +1,291 @@
+/* SCROLL DRIVER */
+.hero-scroll {
+    height: 300vh;
+    position: relative;
+    background: white;
+}
+
+/* STICKY SCENE - Responsive Grid */
+.hero-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    /* responsive center column: 
+       - At least 340px for phone/tablet
+       - Max 480px for desktop
+       - Flanks take remaining space 
+    */
+    grid-template-columns: 1fr minmax(340px, 480px) 1fr;
+    align-items: center;
+    /* Reduced padding for smaller screens */
+    padding: 0 max(2vw, 20px);
+    perspective: 2000px;
+    overflow: hidden;
+}
+
+/* LEFT COLUMN */
+.hero-left {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+    padding-right: clamp(10px, 2vw, 30px);
+    /* Fluid gap */
+    min-width: 0;
+    /* Allow flex shrinking */
+}
+
+/* RIGHT COLUMN */
+.hero-right {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: clamp(10px, 2vw, 30px);
+    /* Fluid gap */
+    min-width: 0;
+}
+
+/* TEXT BLOCKS */
+.hero-block {
+    position: absolute;
+    width: 100%;
+    /* Max width scales with viewport */
+    max-width: clamp(300px, 45vw, 600px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* DUNCAN STYLE TYPOGRAPHY - Fluid Sizing */
+.duncan-name {
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    font-family: var(--font-orbitron);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #555;
+    margin-bottom: -0.5em;
+    margin-right: 5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.duncan-title {
+    /* Fluid font size: Minimum 2.5rem, Ideal 4.5vw, Max 4.5rem */
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    font-family: var(--font-orbitron);
+    font-weight: 900;
+    color: #000;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.duncan-title.right-align {
+    text-align: left;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+/* IMAGE - fluid sizing */
+.hero-image {
+    position: relative;
+    width: 100%;
+    /* Fill the grid cell */
+    max-width: 480px;
+    /* Cap at design size */
+    aspect-ratio: 1 / 1;
+    /* Maintain shape */
+    height: auto;
+    /* Let aspect ratio drive height */
+    z-index: 10;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: clamp(16px, 2vw, 24px);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+}
+
+.hero-img.absolute {
+    position: absolute;
+    inset: 0;
+}
+
+/* HI BADGE */
+.hi-badge {
+    position: absolute;
+    bottom: 12%;
+    /* Relative positioning */
+    right: -10%;
+    /* Relative offset */
+    width: clamp(80px, 15%, 100px);
+    /* Scale badge */
+    height: clamp(80px, 15%, 100px);
+    background: #ccff00;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    backdrop-filter: blur(5px);
+}
+
+.hi-text {
+    font-family: var(--font-inter);
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #1a1a1a;
+    margin-bottom: -5px;
+}
+
+.wave-emoji {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    animation: gentleWave 2s ease-in-out infinite;
+    transform-origin: 70% 70%;
+}
+
+@keyframes gentleWave {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(14deg);
+    }
+
+    20% {
+        transform: rotate(-8deg);
+    }
+
+    30% {
+        transform: rotate(14deg);
+    }
+
+    40% {
+        transform: rotate(-4deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+/* SECTION HEADERS (Education/About) relative to Left Column */
+.section-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-family: var(--font-cinzel);
+    font-weight: 900;
+    color: black;
+    margin-bottom: clamp(1rem, 3vh, 2rem);
+    text-align: right;
+    line-height: 1;
+}
+
+/* SUBTEXT STYLING */
+.edu-copy {
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+    text-align: right;
+}
+
+.edu-degree {
+    font-size: clamp(1.4rem, 2vw, 2.2rem);
+    font-weight: 800;
+    color: #000;
+    font-family: var(--font-orbitron);
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.02em;
+}
+
+.edu-school {
+    font-size: clamp(1rem, 1.5vw, 1.6rem);
+    font-weight: 600;
+    color: #444;
+    font-family: var(--font-inter);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.about-copy {
+    font-size: clamp(1.2rem, 1.6vw, 1.8rem);
+    line-height: 1.4;
+    font-family: var(--font-inter);
+    color: #333;
+    text-align: right;
+    max-width: 550px;
+    font-weight: 600;
+}
+
+/* Override alignment for Edu/About blocks to ensure they stay right-aligned in the left column */
+.intro-block,
+.edu-block,
+.about-block {
+    right: 0;
+}
+
+/* HERO NAVBAR */
+.hero-nav {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 40px;
+    transform: none;
+    display: flex;
+    gap: 30px;
+    padding: 12px 40px;
+    background: rgba(80, 80, 80, 0.25);
+    /* Grey glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0 0 25px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.hero-nav-link {
+    font-family: var(--font-inter);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Bright text visibility */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hero-nav-link:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px);
+}

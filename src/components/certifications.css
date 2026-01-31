@@ -1,0 +1,184 @@
+.cert-section {
+    height: 400vh;
+    /* Smooth scroll duration for 4 certs */
+    background: #ffffff;
+    position: relative;
+}
+
+/* HEADER BLOCK */
+/* HEADER BLOCK */
+.cert-header-block {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cert-eyebrow {
+    font-family: var(--font-inter);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #555;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 40px;
+}
+
+.cert-eyebrow::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background: #555;
+    transform: translateY(-50%);
+}
+
+.cert-main-title {
+    font-family: var(--font-cinzel), serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+.cert-sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* FIX: Ensure background image is centered and not cut */
+.cert-bg-title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 60vh;
+    opacity: 0.08;
+    /* Adjust for "visible enough" */
+    z-index: 1;
+}
+
+.cert-bg-title-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Prevents image from being cut off */
+}
+
+.cert-main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 8vw;
+    z-index: 10;
+    gap: 60px;
+}
+
+.cert-text-area {
+    position: relative;
+    height: 300px;
+}
+
+.cert-text-block {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cert-label {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #7B3FF2;
+    display: block;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.cert-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.cert-meta {
+    color: #666;
+    font-size: 1.1rem;
+    border-left: 2px solid #7B3FF2;
+    padding-left: 15px;
+}
+
+.cert-visual-area {
+    height: 500px;
+    perspective: 2000px;
+    /* High depth for 3D effect */
+    position: relative;
+}
+
+.cert-card-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.cert-card-inner {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.cert-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .cert-main-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cert-text-area {
+        height: 180px;
+    }
+
+    .cert-text-block {
+        position: relative;
+    }
+
+    .cert-name {
+        font-size: 2.5rem;
+    }
+
+    .cert-visual-area {
+        height: 400px;
+    }
+}
