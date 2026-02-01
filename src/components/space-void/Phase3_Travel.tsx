@@ -23,7 +23,7 @@ export default function Phase3_Travel() {
     useEffect(() => {
         const syncInterval = setInterval(() => {
             setIsPaused(prev => !prev);
-        }, 7000); // Toggle every 7 seconds to match half of the 14s cycle
+        }, 5000); // Toggle every 5 seconds as requested
 
         return () => clearInterval(syncInterval);
     }, []);
@@ -101,7 +101,7 @@ export default function Phase3_Travel() {
                         opacity: 1,
                     }}
                     transition={{
-                        duration: 7, // Matches the isPaused toggle
+                        duration: 5, // Matches the isPaused toggle
                         repeat: Infinity,
                         repeatType: "reverse",
                         ease: "easeInOut",
