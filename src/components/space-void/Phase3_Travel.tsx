@@ -114,14 +114,26 @@ export default function Phase3_Travel() {
                         }}
                         className="w-full max-w-4xl"
                     >
-                        {/* 🎓 EDUCATION GLASS CARD */}
-                        <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-[2.5rem] border border-white/10 relative overflow-hidden group shadow-[0_0_120px_rgba(168,85,247,0.25)] backdrop-blur-3xl bg-black/40">
+                        {/* 🎓 EDUCATION GLASS CARD - SQUARE HUD STYLE */}
+                        <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-sm border border-white/20 relative group shadow-[0_0_120px_rgba(168,85,247,0.25)] backdrop-blur-3xl bg-black/40">
+
+                            {/* HUD CORNER LABELS */}
+                            <div className="absolute top-2 left-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">SYST_LOG_03</div>
+                            <div className="absolute top-2 right-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">ED_TR_432</div>
+                            <div className="absolute bottom-2 left-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">POS: 42.1N 12.8E</div>
+                            <div className="absolute bottom-2 right-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">STAT: SYNCED</div>
 
                             {/* Inner Contrast Layer */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent rounded-[2.5rem] pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent rounded-sm pointer-events-none" />
 
                             {/* Glossy Reflection */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20 pointer-events-none rounded-[2.5rem]" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20 pointer-events-none rounded-sm" />
+
+                            {/* Corner Decorative Brackets */}
+                            <div className="absolute -top-[2px] -left-[2px] w-4 h-4 border-t-2 border-l-2 border-purple-500" />
+                            <div className="absolute -top-[2px] -right-[2px] w-4 h-4 border-t-2 border-r-2 border-purple-500" />
+                            <div className="absolute -bottom-[2px] -left-[2px] w-4 h-4 border-b-2 border-l-2 border-purple-500" />
+                            <div className="absolute -bottom-[2px] -right-[2px] w-4 h-4 border-b-2 border-r-2 border-purple-500" />
 
                             <div className="relative z-10 text-center">
                                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-orbitron font-bold text-white mb-10 tracking-[0.2em] flex items-center justify-center gap-6">
