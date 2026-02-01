@@ -89,8 +89,10 @@ export default function Phase3_Travel() {
                 <motion.img
                     src="/assets/astronautimg.png"
                     alt="Floating Astronaut"
-                    className="absolute left-[5%] md:left-[8%] top-1/2 -translate-y-1/2 
-                               w-[180px] sm:w-[240px] md:w-[320px] lg:w-[450px]
+                    className="absolute left-[4%] md:left-[6%] 
+                               max-w-[420px]
+                               top-1/2 -translate-y-1/2 
+                               w-[160px] sm:w-[220px] md:w-[300px] lg:w-[380px]
                                z-10 pointer-events-none select-none drop-shadow-[0_0_50px_rgba(168,85,247,0.3)]"
                     initial={{ y: 40, rotate: -8, opacity: 0 }}
                     animate={{
@@ -106,13 +108,18 @@ export default function Phase3_Travel() {
                     }}
                 />
 
+                {/* VISUAL DIVIDER GRADIENT */}
+                <div className="absolute left-[35%] top-0 h-full w-[120px]
+                                bg-gradient-to-r from-transparent via-black/40 to-transparent
+                                z-[8] pointer-events-none" />
+
                 {/* HUD: Education Data - GRID ANCHORED FOR COCKPIT FEEL */}
                 <div className="relative z-20 grid grid-cols-12 w-full">
                     <motion.div
                         style={{
                             opacity: hudOpacity,
                         }}
-                        className="col-span-12 md:col-span-5 md:col-start-6 lg:col-start-5"
+                        className="col-span-12 md:col-span-5 md:col-start-7 lg:col-start-7"
                     >
                         {/* 🎓 EDUCATION GLASS CARD - SQUARE HUD STYLE */}
                         <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-sm border border-white/20 relative group mr-6 lg:mr-12 shadow-[0_0_120px_rgba(168,85,247,0.25),0_0_40px_rgba(0,0,0,0.6)] backdrop-blur-3xl bg-black/40">
