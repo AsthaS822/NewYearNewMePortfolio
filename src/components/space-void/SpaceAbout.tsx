@@ -42,13 +42,9 @@ const CinematicAbout = () => {
                     muted
                     loop
                     playsInline
-                    onCanPlay={(e) => {
-                        e.currentTarget.play().catch(() => { });
-                    }}
-                    className="w-full h-full object-cover grayscale brightness-110"
-                >
-                    <source src="/assets/moonvidoe.mp4" type="video/mp4" />
-                </video>
+                    src="/assets/moonvidoe.mp4"
+                    className="w-full h-full object-cover brightness-110"
+                />
 
                 {/* Subtle Outer Glow to make it pop against the black */}
                 <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(255,255,255,0.1),0_0_50px_rgba(255,255,255,0.05)]" />

@@ -16,10 +16,9 @@ const Hero = () => {
                 muted
                 loop
                 playsInline
-                className="absolute top-[-350px] md:top-[-280px] left-0 z-[1] w-full h-full object-cover opacity-80 rotate-180"
-            >
-                <source src="/assets/blackhole.webm" type="video/webm" />
-            </video>
+                src="/assets/blackhole.webm"
+                className="absolute inset-0 z-[1] w-full h-full object-cover opacity-80"
+            />
 
             {/* 2. OVERLAY GRADIENT: Blends video into the black background */}
             <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-black/20 to-black pointer-events-none" />
