@@ -26,7 +26,7 @@ export default function Scene05_SkillsSpiral() {
 
     const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint, Events } = Matter;
 
-    // Create engine with improved config
+    // Engine configuration
     const engine = Engine.create({
       enableSleeping: false,
       gravity: { x: 0, y: 1 }, // Default gravity scale for visible motion
@@ -50,7 +50,7 @@ export default function Scene05_SkillsSpiral() {
       },
     });
 
-    // 🔥 FORCE MATTER CANVAS TO BE INTERACTIVE
+    // Canvas setup
     render.canvas.style.pointerEvents = "auto";
     render.canvas.style.position = "absolute";
     render.canvas.style.top = "0";
@@ -93,7 +93,7 @@ export default function Scene05_SkillsSpiral() {
 
     Composite.add(world, skillBodies);
 
-    // Mouse Interaction - 🔥 Snappy, heavy dragging
+    // Mouse interaction
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
@@ -130,7 +130,7 @@ export default function Scene05_SkillsSpiral() {
       });
     });
 
-    // Keep React state in sync with Physics engine - 🔥 Throttled for performance
+    // Sync state with physics engine
     let frame = 0;
     Events.on(engine, "afterUpdate", () => {
       frame++;
@@ -150,7 +150,7 @@ export default function Scene05_SkillsSpiral() {
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    // RESET MECHANISM: Grid-Snap Physics when section first enters view
+    // Grid-Snap positioning
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         const boxWidth = 160;

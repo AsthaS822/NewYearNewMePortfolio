@@ -56,7 +56,7 @@ const ThreeWave = ({
 
         const t = state.clock.elapsedTime;
 
-        // --- ORGANIC LIQUID POOL (Vertex Animation) ---
+        // Liquid animation
         const geom = meshRef.current.geometry as THREE.PlaneGeometry;
         const posAttr = geom.attributes.position;
 
@@ -73,10 +73,7 @@ const ThreeWave = ({
         }
         posAttr.needsUpdate = true;
 
-        // --- DIPPING ANIMATION (Rise -> Hold -> Drain) ---
-        // We act on 'y' position because the plane is rotated flat (-90deg x-axis)
-        // Standard "Floor" level is roughly y = -2. Cylinder bottom is approx -1.5.
-
+        // Transition phases
         if (phase === "enter") {
             // Rise up from below (y: -5 -> -1.5) to "dip" the cylinder
             meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, -1.2, 0.05);
@@ -157,8 +154,8 @@ export default function Projects() {
                 const currentIdx = index % projectData.length;
                 setActiveIndex(currentIdx); // Track color even when text is null
 
-                /* ------------------ 1. WAVE INTRO ------------------ */
-                setFocusedIdx(null);              // ❗ no text
+                // Phase 1: Wave
+                setFocusedIdx(null);
                 setShowcasePhase("wave");
                 setWavePhase("enter");
                 await sleep(2000);
@@ -166,17 +163,17 @@ export default function Projects() {
                 setWavePhase("hold");
                 await sleep(4000);                // wave alone
 
-                /* ------------------ 2. CYLINDER HERO ------------------ */
+                // Phase 2: Cylinder
                 setWavePhase("exit");
                 setShowcasePhase("cylinder");
                 await sleep(2500);                // cylinder motion time
 
-                /* ------------------ 3. TEXT REVEAL ------------------ */
-                setFocusedIdx(currentIdx);        // ✅ NOW show text
+                // Phase 3: Text
+                setFocusedIdx(currentIdx);
                 setShowcasePhase("text");
                 await sleep(6000);                // reading time
 
-                /* ------------------ 4. RESET ------------------ */
+                // Phase 4: Reset
                 setFocusedIdx(null);
                 setWavePhase("idle");
                 setShowcasePhase("idle");

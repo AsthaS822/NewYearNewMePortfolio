@@ -26,7 +26,7 @@ export default function Phase1_Entry({ onComplete }: Phase1Props) {
 
     return (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center font-orbitron overflow-hidden">
-            {/* Purple Shining Stars Background */}
+            {/* Stars */}
             <div className="absolute inset-0 z-0">
                 {[...Array(50)].map((_, i) => (
                     <motion.div
