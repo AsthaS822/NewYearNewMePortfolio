@@ -26,8 +26,8 @@ const CinematicAbout = () => {
             id="about"
         >
             {/* Background Gradient */}
-            <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+            <div className="absolute inset-0 z-[-1] pointer-events-none" style={{ backgroundColor: 'black' }}>
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-60" />
             </div>
             {/* 1. THE MOON SPHERE (From your moonvidoe.mp4) */}
             <motion.div
@@ -43,7 +43,7 @@ const CinematicAbout = () => {
                     loop
                     playsInline
                     src="/assets/moonvidoe.mp4"
-                    className="w-full h-full object-cover brightness-110"
+                    className="w-full h-full object-cover brightness-110 bg-black"
                 />
 
                 {/* Subtle Outer Glow to make it pop against the black */}
@@ -72,8 +72,8 @@ const CinematicAbout = () => {
                 </div>
             </motion.div>
 
-            {/* Cinematic Scanline/Grain (Optional but adds to the look) */}
-            <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            {/* Visual Polish */}
+            <div className="absolute inset-0 z-20 pointer-events-none bg-black/10" />
         </section>
     );
 };
