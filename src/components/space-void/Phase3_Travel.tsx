@@ -106,22 +106,21 @@ export default function Phase3_Travel() {
                     }}
                 />
 
-                {/* HUD: Education Data - SHIFTED TOWARDS RIGHT EDGE */}
-                <div className="relative z-20 flex items-center justify-end w-full px-6 md:px-12 lg:pr-16">
+                {/* HUD: Education Data - GRID ANCHORED FOR COCKPIT FEEL */}
+                <div className="relative z-20 grid grid-cols-12 w-full">
                     <motion.div
                         style={{
                             opacity: hudOpacity,
                         }}
-                        className="w-full max-w-4xl"
+                        className="col-span-12 md:col-span-5 md:col-start-6 lg:col-start-5"
                     >
                         {/* 🎓 EDUCATION GLASS CARD - SQUARE HUD STYLE */}
-                        <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-sm border border-white/20 relative group shadow-[0_0_120px_rgba(168,85,247,0.25)] backdrop-blur-3xl bg-black/40">
+                        <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-sm border border-white/20 relative group mr-6 lg:mr-12 shadow-[0_0_120px_rgba(168,85,247,0.25),0_0_40px_rgba(0,0,0,0.6)] backdrop-blur-3xl bg-black/40">
 
                             {/* HUD CORNER LABELS */}
                             <div className="absolute top-2 left-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">SYST_LOG_03</div>
                             <div className="absolute top-2 right-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">ED_TR_432</div>
                             <div className="absolute bottom-2 left-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">POS: 42.1N 12.8E</div>
-                            <div className="absolute bottom-2 right-3 font-mono text-[10px] text-white/40 tracking-tighter select-none">STAT: SYNCED</div>
 
                             {/* Inner Contrast Layer */}
                             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent rounded-sm pointer-events-none" />
@@ -151,7 +150,7 @@ export default function Phase3_Travel() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
-                                            <p className="text-xl text-white/90 font-light">MCA</p>
+                                            <p className="text-xl text-white font-light">MCA</p>
                                             <span className="text-sm text-white/40 font-mono tracking-widest">2024 – 2026</span>
                                         </div>
                                     </div>
@@ -164,7 +163,7 @@ export default function Phase3_Travel() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
-                                            <p className="text-xl text-white/90 font-light">BSc (Maths & CS)</p>
+                                            <p className="text-xl text-white font-light">BSc (Maths & CS)</p>
                                             <span className="text-sm text-white/40 font-mono tracking-widest">2020 – 2023</span>
                                         </div>
                                     </div>
