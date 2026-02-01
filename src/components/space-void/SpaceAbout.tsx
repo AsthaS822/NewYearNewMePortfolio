@@ -11,69 +11,63 @@ const CinematicAbout = () => {
         offset: ["start end", "end start"],
     });
 
-    // Parallax: The moon floats upward while the text stays more stable
-    const moonY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-    const moonScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1.1]);
-
-    // Text fade and slide
-    const textOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
-    const textScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1]);
+    // Text motion
+    const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
+    const textX = useTransform(scrollYProgress, [0.15, 0.35], [-40, 0]);
 
     return (
         <section
             ref={containerRef}
-            className="relative h-[160vh] w-full bg-black overflow-hidden flex flex-col items-center justify-center"
             id="about"
+            className="relative h-[130vh] w-full bg-black overflow-hidden flex items-center"
         >
-            {/* Background Gradient */}
-            <div className="absolute inset-0 z-[-1] pointer-events-none" style={{ backgroundColor: 'black' }}>
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-60" />
-            </div>
-            {/* 1. THE MOON SPHERE (From your moonvidoe.mp4) */}
-            <motion.div
-                style={{
-                    y: moonY,
-                    scale: moonScale,
-                }}
-                className="absolute z-0 w-[90vh] h-[90vh] rounded-full overflow-hidden"
-            >
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    src="/assets/moonvidoe.mp4"
-                    className="w-full h-full object-cover brightness-110 bg-black"
-                />
+            {/* GRID LAYOUT */}
+            <div className="relative z-10 grid h-full w-full grid-cols-1 md:grid-cols-2 items-center px-10 md:px-20">
 
-                {/* Subtle Outer Glow to make it pop against the black */}
-                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(255,255,255,0.1),0_0_50px_rgba(255,255,255,0.05)]" />
-            </motion.div>
+                {/* LEFT — TEXT */}
+                <motion.div
+                    style={{ opacity: textOpacity, x: textX }}
+                    className="relative z-20"
+                >
+                    <h2 className="text-white text-[14vw] md:text-[9vw] font-black italic tracking-tight leading-none font-orbitron">
+                        ABOUT
+                    </h2>
 
-            {/* 2. THE OVERLAY TEXT (Cinematic Masking) */}
-            <motion.div
-                style={{ opacity: textOpacity, scale: textScale }}
-                className="relative z-10 flex flex-col items-center justify-center w-full"
-            >
-                {/* MASSIVE BACKGROUND TEXT */}
-                {/* 'mix-blend-difference' makes it look exactly like your reference video */}
-                <h2 className="text-white text-[18vw] font-black tracking-tighter uppercase leading-none mix-blend-difference select-none italic" style={{ textShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
-                    ABOUT
-                </h2>
+                    <div className="mt-10 max-w-xl">
+                        <div className="h-[2px] w-24 bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 mb-8" />
 
-                {/* DESCRIPTION BOX */}
-                <div className="mt-[-4vh] px-8 max-w-4xl text-center backdrop-blur-[2px]">
-                    <div className="h-[2px] w-24 bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 mx-auto mb-10" />
+                        <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
+                            I am a <span className="font-bold">Fullstack Software Engineer</span>.
+                            I specialize in bridging the gap between{" "}
+                            <span className="text-purple-400 italic">complex logic</span>{" "}
+                            and{" "}
+                            <span className="text-cyan-400">immersive design</span>.
+                        </p>
+                    </div>
+                </motion.div>
 
-                    <p className="text-white text-xl md:text-3xl font-light leading-relaxed drop-shadow-2xl">
-                        I am a <span className="font-bold">Fullstack Software Engineer</span>.
-                        I specialize in bridging the gap between <span className="text-purple-400 italic">complex logic</span> and <span className="text-cyan-400">immersive design</span>.
-                    </p>
+                {/* RIGHT — MOON VIDEO (Full Height Panel) */}
+                <div
+                    className="absolute md:relative right-0 top-0 h-full w-full md:w-[50vw] overflow-hidden"
+                >
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        src="/assets/moonvidoe.mp4"
+                        className="h-full w-full object-cover opacity-80"
+                    />
+
+                    {/* SPACE DEPTH GRADIENTS */}
+                    <div className="absolute inset-0 bg-gradient-to-l from-black via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-black/30" />
+
+                    {/* Top/Bottom Fade to blend with black background */}
+                    <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
                 </div>
-            </motion.div>
-
-            {/* Visual Polish */}
-            <div className="absolute inset-0 z-20 pointer-events-none bg-black/10" />
+            </div>
         </section>
     );
 };
