@@ -187,7 +187,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                             </div>
                         </div>
                         <div className="scan-window absolute inset-0 z-20 overflow-hidden" style={{ clipPath: "inset(0 100% 0 0)" }}>
-                            <img src="/assets/backim.png" className="absolute inset-0 w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(255,215,0,0.7)]" alt="Internal" />
+                            <img src="/assets/backimage.png" className="absolute inset-0 w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(255,215,0,0.7)]" alt="Internal" />
                         </div>
                         <div className="role-text absolute bottom-[-50px] w-full text-center text-[#FFD700] tracking-[15px] font-black text-lg opacity-0 italic">
                             FRONTEND_DEVELOPER
