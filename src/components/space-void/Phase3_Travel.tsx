@@ -106,8 +106,8 @@ export default function Phase3_Travel() {
                     }}
                 />
 
-                {/* HUD: Education Data - CONTAINED AND READABLE */}
-                <div className="relative z-20 flex items-center justify-end w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:pr-32">
+                {/* HUD: Education Data - SHIFTED TOWARDS RIGHT EDGE */}
+                <div className="relative z-20 flex items-center justify-end w-full px-6 md:px-12 lg:pr-16">
                     <motion.div
                         style={{
                             opacity: hudOpacity,
