@@ -7,16 +7,35 @@ const deepSpaceVid = "/assets/deepspace.mp4";
 export default function Phase3_Travel() {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // 1. Local state for the initial timed blur
+    // 1. Local state for the initial timed blur and video sync
     const [isInitialBlur, setIsInitialBlur] = useState(true);
+    const [isPaused, setIsPaused] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        // After 2 seconds, remove the initial blur
         const timer = setTimeout(() => {
             setIsInitialBlur(false);
         }, 2800);
         return () => clearTimeout(timer);
     }, []);
+
+    // Synchronize video with astronaut float (14s cycle)
+    useEffect(() => {
+        const syncInterval = setInterval(() => {
+            setIsPaused(prev => !prev);
+        }, 7000); // Toggle every 7 seconds to match half of the 14s cycle
+
+        return () => clearInterval(syncInterval);
+    }, []);
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+        if (isPaused) {
+            videoRef.current.pause();
+        } else {
+            videoRef.current.play().catch(() => { });
+        }
+    }, [isPaused]);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -35,7 +54,7 @@ export default function Phase3_Travel() {
 
     return (
         <section ref={containerRef} className="relative h-[200vh] w-full bg-black overflow-x-hidden overflow-y-visible -mb-[1px]">
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center px-6 md:px-12 lg:px-20">
+            <div className="sticky top-0 h-screen w-full max-w-[1600px] mx-auto flex items-center justify-center px-6 md:px-12 lg:px-20">
 
                 {/* MAIN VISUAL */}
                 <motion.div
@@ -52,17 +71,19 @@ export default function Phase3_Travel() {
                     className="absolute inset-0 z-0 pointer-events-none"
                 >
                     <video
+                        ref={videoRef}
                         src={deepSpaceVid}
                         autoPlay
                         muted
                         loop
                         playsInline
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-opacity duration-1000"
+                        style={{ opacity: isPaused ? 0.4 : 1 }}
                     />
                 </motion.div>
 
-                {/* VIGNETTE LAYER */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40 pointer-events-none z-[5]" />
+                {/* VIGNETTE LAYER - Left to right falloff */}
+                <div className="absolute inset-0 z-[5] bg-gradient-to-r from-black/80 via-black/30 to-transparent pointer-events-none" />
 
                 {/* 👨🚀 FLOATING ASTRONAUT */}
                 <motion.img
@@ -73,68 +94,73 @@ export default function Phase3_Travel() {
                                z-10 pointer-events-none select-none drop-shadow-[0_0_50px_rgba(168,85,247,0.3)]"
                     initial={{ y: 40, rotate: -8, opacity: 0 }}
                     animate={{
-                        y: [40, -40, 40],
-                        rotate: [-8, 6, -8],
+                        y: isPaused ? [-40, 40] : [40, -40], // Slower, purposeful float
+                        rotate: isPaused ? [6, -8] : [-8, 6],
                         opacity: 1,
                     }}
                     transition={{
-                        duration: 14,
+                        duration: 7, // Matches the isPaused toggle
                         repeat: Infinity,
+                        repeatType: "reverse",
                         ease: "easeInOut",
                     }}
                 />
 
-                {/* HUD: Education Data - SHIFTED TO RIGHT */}
-                <motion.div
-                    style={{
-                        opacity: hudOpacity,
-                    }}
-                    className="absolute inset-0 flex items-center justify-end z-20 pr-6 md:pr-16 lg:pr-24"
-                >
-                    {/* 🎓 EDUCATION GLASS CARD */}
-                    <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-[2.5rem] border border-white/10 relative overflow-visible group shadow-[0_0_120px_rgba(168,85,247,0.25)] max-w-4xl w-full backdrop-blur-2xl bg-white/[0.02]">
-                        {/* Glossy Reflection */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-30 pointer-events-none rounded-[2.5rem]" />
+                {/* HUD: Education Data - CONTAINED AND READABLE */}
+                <div className="relative z-20 flex items-center justify-end w-full max-w-[1400px] mx-auto px-6 md:px-12">
+                    <motion.div
+                        style={{
+                            opacity: hudOpacity,
+                        }}
+                        className="w-full max-w-4xl"
+                    >
+                        {/* 🎓 EDUCATION GLASS CARD */}
+                        <div className="px-6 sm:px-10 py-12 md:px-16 md:py-20 rounded-[2.5rem] border border-white/10 relative overflow-hidden group shadow-[0_0_120px_rgba(168,85,247,0.25)] backdrop-blur-3xl bg-black/40">
 
-                        <div className="relative z-10 text-center">
-                            <h3 className="text-3xl sm:text-4xl md:text-5xl font-orbitron font-bold text-white mb-10 tracking-[0.2em] flex items-center justify-center gap-6">
-                                <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-[0_0_20px_#a855f7]" />
-                                EDUCATION_LOG
-                                <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-[0_0_20px_#a855f7]" />
-                            </h3>
+                            {/* Inner Contrast Layer */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent rounded-[2.5rem] pointer-events-none" />
 
-                            <div className="flex flex-col gap-6 text-left divide-y divide-white/10">
-                                {/* Master's */}
-                                <div className="py-6 first:pt-0 hover:bg-white/5 transition-colors rounded-2xl md:px-6">
-                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-2 gap-2">
-                                        <h4 className="text-purple-300 font-bold text-3xl">VIT Bhopal</h4>
-                                        <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
-                                            <span className="text-xs md:text-sm text-purple-300 font-mono font-bold">CGPA: 8.80</span>
+                            {/* Glossy Reflection */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20 pointer-events-none rounded-[2.5rem]" />
+
+                            <div className="relative z-10 text-center">
+                                <h3 className="text-3xl sm:text-4xl md:text-5xl font-orbitron font-bold text-white mb-10 tracking-[0.2em] flex items-center justify-center gap-6">
+                                    <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-[0_0_20px_#a855f7]" />
+                                    EDUCATION_LOG
+                                    <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-[0_0_20px_#a855f7]" />
+                                </h3>
+
+                                <div className="flex flex-col gap-6 text-left divide-y divide-white/10">
+                                    <div className="py-6 first:pt-0 hover:bg-white/5 transition-colors rounded-2xl md:px-6">
+                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-2 gap-4">
+                                            <h4 className="text-purple-300 font-bold text-3xl">VIT Bhopal</h4>
+                                            <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+                                                <span className="text-xs md:text-sm text-purple-300 font-mono font-bold">CGPA: 8.80</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
+                                            <p className="text-xl text-white/90 font-light">MCA</p>
+                                            <span className="text-sm text-white/40 font-mono tracking-widest">2024 – 2026</span>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
-                                        <p className="text-xl text-white/90 font-light">MCA</p>
-                                        <span className="text-sm text-white/40 font-mono tracking-widest whitespace-nowrap">2024 – 2026</span>
-                                    </div>
-                                </div>
 
-                                {/* Bachelor's */}
-                                <div className="py-6 last:pb-0 hover:bg-white/5 transition-colors rounded-2xl md:px-6">
-                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-2 gap-2">
-                                        <h4 className="text-purple-300 font-bold text-3xl">MGKVP Varanasi</h4>
-                                        <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
-                                            <span className="text-xs md:text-sm text-purple-300 font-mono font-bold">64.67%</span>
+                                    <div className="py-6 last:pb-0 hover:bg-white/5 transition-colors rounded-2xl md:px-6">
+                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-2 gap-4">
+                                            <h4 className="text-purple-300 font-bold text-3xl">MGKVP Varanasi</h4>
+                                            <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+                                                <span className="text-xs md:text-sm text-purple-300 font-mono font-bold">64.67%</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
-                                        <p className="text-xl text-white/90 font-light">BSc (Maths & CS)</p>
-                                        <span className="text-sm text-white/40 font-mono tracking-widest whitespace-nowrap">2020 – 2023</span>
+                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-2">
+                                            <p className="text-xl text-white/90 font-light">BSc (Maths & CS)</p>
+                                            <span className="text-sm text-white/40 font-mono tracking-widest">2020 – 2023</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
 
                 {/* Scanline/Grid Effect */}
                 <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-30" />
