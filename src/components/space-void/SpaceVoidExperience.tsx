@@ -58,7 +58,7 @@ export default function SpaceVoidExperience() {
             )}
 
             {currentPhase === "main" && (
-                <main className="relative z-10 bg-black min-h-screen text-white selection:bg-primary/30">
+                <main className="relative z-10 !bg-black min-h-screen text-white selection:bg-primary/30" style={{ backgroundColor: 'black' }}>
                     <SpaceHero />
 
                     <div id="about">
