@@ -15,7 +15,7 @@ export default function Phase1_5_WarpGame({ onComplete }: WarpGameProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const keysPressed = useRef<{ [key: string]: boolean }>({});
 
-    // Physics Loop for "Banking/Tilting" only
+    // Physics for banking
     useEffect(() => {
         if (isWarping) return;
         let animationFrameId: number;
@@ -39,7 +39,7 @@ export default function Phase1_5_WarpGame({ onComplete }: WarpGameProps) {
         return () => cancelAnimationFrame(animationFrameId);
     }, [isWarping]);
 
-    // Keyboard state tracking
+    // Keyboard tracking
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => { keysPressed.current[e.key] = true; };
         const handleKeyUp = (e: KeyboardEvent) => { keysPressed.current[e.key] = false; };
@@ -51,7 +51,7 @@ export default function Phase1_5_WarpGame({ onComplete }: WarpGameProps) {
         };
     }, []);
 
-    // Distance Loop with Speed logic
+    // Distance logic
     useEffect(() => {
         if (isWarping) return;
 
@@ -61,8 +61,8 @@ export default function Phase1_5_WarpGame({ onComplete }: WarpGameProps) {
                     return 100;
                 }
 
-                // BASE SPEED: Always moving forward slowly
-                let speed = 0.2;
+                // BASE SPEED: Always moving forward
+                let speed = 0.25;
 
                 // KEY CONTROL: Right Arrow adds speed, Left Arrow subtracts speed
                 if (keysPressed.current["ArrowRight"]) speed += 0.8;
@@ -84,7 +84,7 @@ export default function Phase1_5_WarpGame({ onComplete }: WarpGameProps) {
         return () => clearInterval(interval);
     }, [isWarping]);
 
-    // Completion Trigger
+    // Finish trigger
     useEffect(() => {
         if (distance >= 100 && !isWarping) {
             setIsWarping(true);

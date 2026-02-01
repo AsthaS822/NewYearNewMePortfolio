@@ -25,14 +25,8 @@ const CinematicAbout = () => {
             className="relative h-[160vh] w-full bg-black overflow-hidden flex flex-col items-center justify-center"
             id="about"
         >
-            {/* 0. CLOUDFLARE BACKGROUND VIDEO (Behind moon) */}
+            {/* Background Gradient */}
             <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40">
-                <iframe
-                    src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/964cb3eddff1a67e3772aac9a7aceea2/iframe?autoplay=true&loop=true&muted=true&controls=false"
-                    className="w-full h-full border-none object-cover"
-                    allow="autoplay; fullscreen"
-                    loading="lazy"
-                />
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
             </div>
             {/* 1. THE MOON SPHERE (From your moonvidoe.mp4) */}
@@ -53,7 +47,7 @@ const CinematicAbout = () => {
                     }}
                     className="w-full h-full object-cover grayscale brightness-110"
                 >
-                    <source src="/space/moonvidoe.mp4" type="video/mp4" />
+                    <source src="/assets/moonvidoe.mp4" type="video/mp4" />
                 </video>
 
                 {/* Subtle Outer Glow to make it pop against the black */}

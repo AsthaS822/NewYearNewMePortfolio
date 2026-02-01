@@ -18,7 +18,7 @@ const Hero = () => {
                 playsInline
                 className="absolute top-[-350px] md:top-[-280px] left-0 z-[1] w-full h-full object-cover opacity-80 rotate-180"
             >
-                <source src="/space/blackhole.webm" type="video/webm" />
+                <source src="/assets/blackhole.webm" type="video/webm" />
             </video>
 
             {/* 2. OVERLAY GRADIENT: Blends video into the black background */}

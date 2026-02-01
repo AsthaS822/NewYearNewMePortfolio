@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const astronautLookingVid = "/space/astronautlooking-Ci82unKl.mp4";
+const astronautLookingVid = "/assets/astronautlooking.mp4";
 
 export default function Phase6_Mission() {
     return (
